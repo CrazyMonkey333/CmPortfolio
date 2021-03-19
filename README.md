@@ -1,18 +1,14 @@
 # Cm_Portfolio
 data science portfolio
 
-# FEATURED PROJECT 1 : Determining Housing Prices using Data Science
+## FEATURED PROJECT 1 : Determining Housing Prices using Data Science
 
-# Background
-   
+#### Background
    The Iowa State University and the Commerce Committee of the Iowa House of Representatives are looking into the community of Ames Iowa to understand home values in our region. The Real Estate Appraisers Coalition of Ames Iowa and I have taken on the task of creating a simplified model that will predict home values based on multiple qualities of the home. We will be looking at everything from the numbers of bedrooms and baths, locationality, quality and condition, square footage, and materials.
-
 We have a data set containing information from the Ames Assessor’s Office used in calculating the assessed values for individual residential properties sold in Ames, IA from 2006 to 2010. The detailed description in the data documentation is here:  ([DataDoc](http://jse.amstat.org/v19n3/decock/DataDocumentation.txt))
-
 We will be sorting through the eighty-two variables and identifying the most effective variables to include in our model. Then we will create our model and measure its accuracy.
 
-## Problem Statement:
-
+### Problem Statement:
     Let's say: I am a data scientist working for the Real Estate Appraisers Coalition of Ames Iowa.
     We have a lot of homes in the region that need to be quickly appraised for government and educational purposes.
     We have data from the Ames Iowa Assessor’s Office used in computing values for individual residential properties 
@@ -20,32 +16,27 @@ We will be sorting through the eighty-two variables and identifying the most eff
     data entries, and in doing so we will determine what factors make the most significant impacts on the model
     to make the model more effective. Furthermore, we will test and verify these results on a competitive website for 
     data scientists (keggle) and come to an analysis on how effective the model actually is.
- 
-
 ### Essentially we are asking the question:
 1. What factors really matter in determining a fair market value?
-
     
-# Brief Summary of Analysis and visualizations:
+### Brief Summary of Analysis and Visualizations:
 The plan of attack on cleaning this data changed numerous times through the process of analyzing the data. The data has 82 columns which include 23 nominal, 23 ordinal, 14 discrete, and 20 continuous variables. 
 
 #### Cleaning the Ordinals:
-The 23 ordinal values had a lot of null values, but 'NA' was often an option so in the interest of simplicity I assumed the assessor did not mark anything there, the home likely did not have one. This worked great for the basement, garage, fireplace, fence, pool and other quality and condition assessments with no values. 
-I set up a dictionary to change the values in the data set of all the ordinal columns into ordered numerical values. NA being set at 0 and the quality and condition starting from worst at 1 and best at the maximum. 
+The 23 ordinal values had a lot of null values, but 'NA' was often an option. So in the interest of simplicity I assumed the assessor did not mark anything there and fulled nulls with 'NA', because the home likely did not have that feature. This worked great for the basement, garage, fireplace, fence, pool and other quality and condition assessments with no values. 
+I set up a dictionary to change the values in the data set of all the ordinal columns into ordered numerical values. NA being set at 0 and the quality and condition starting from worst at 1 and best at the maximum. The features did not all have the same numerical quantity of ranking these qualities, however that can be fixed in the modeling process by using a standard scaler on the data.   
 
 #### Cleaning the Nominals:
-For the nominal values, all null values were set to 'NA'. Then I individually domified them and checked their correlation to determine what was relevant. I'll go further into detail on this process later in this report. 
+For the nominal values, all null values were set to 'NA'. Then I individually one-hot encoded them and checked their correlation to determine what was most relevant to price. I'll go further into detail on this process later in this report. 
 
 #### Cleaning the Numerical:
-Most of the numerical values did not have many null values. In fact, 10 of the numerical columns only had one single null value. So not to skew the data I set the null value in each of those 10 columns to the mean of their respective columns. This may have had a small but hardly significant dampening effect on the standard deviation. This is something that as interested me for further inspection later. What should one do if there are lots of null values?
+Most of the numerical values did not have many null values. In fact, 10 of the numerical columns only had one single null value. So not to skew the data I set the null value in each of those 10 columns to the mean of their respective columns. This may have had a small but hardly significant dampening effect on the standard deviation. This is something that has interested me for further inspection later. What should one do if there are lots of null values in numerical columns? Replacing with the mean cannot be good when there are large amounts of data with null values. However in this case because these numerical columns are such a minor subset of the larger dataset I'm going to go with this method. 
 
-Lot Frontage is one of those cases, in which it has many null values.  I decided not to include Lot Frontage as a determining variable in my model because of these null values. Initially I measured Lot Frontage correlation to sale price as 34% with those null values as null (so not included in the calculation), and I also calculated it with setting the nulls to the mean and it only slightly changed the correlation down to 32.5%. However, setting the nulls to equal zero significantly decreased the correlation to the sale price down to 18%. Seeing that I had no actual clue why these values were null I figured best to leave it out of the model entirely, just in case.
+Lot Frontage is one of those cases, in which it has many null values.  I decided not to include Lot Frontage as a determining variable in my model because of these null values. Initially I measured Lot Frontage correlation to sale price as 34% with those null values as null (so not included in the calculation), and I also calculated it with setting the nulls to the mean and it only slightly changed the correlation down to 32.5%. However, setting the nulls to equal zero significantly decreased the correlation to the sale price down to 18%. Seeing that I had no actual clue why these values were null I figured best to leave it out of the model entirely, just in case. Perhaps with a different method of cleaning null values I could solve this issue. Lot Frontage has a significant impact on price so it is a big bummer to cut it out. 
 
+### Exploratory Data Analysis
 
-
-# Exploratory Data Analysis
-
-### Heatmap of the absolute value of all variables correlated to sale price
+#### Heatmap of the absolute value of all variables correlated to sale price
 ![title](photos/proj_2_absolutevalue_ALL_heatmap.jpg)
 
  To analyze the data, one of the first actions I took was to check the correlations of the numerical columns and ordered columns and take note of the columns of interest. I considered all the columns with correlation coefficients with an absolute value greater than 0.45 to be worthy of including in the model because of their strong relationship to price.  Furthermore, for simplification, I combined living area above grade with basement total square footage minus the unfinished basement area. This will give us the total living area and that seems to be one of the most important factors in making a clear and coherent model. The best fit line follows a more linear path with these elements combined.
@@ -90,22 +81,20 @@ Bucketed Items of Importance
  Finally, I removed outlines in general living area, total basement square footage and the 1st floor square footage. It was a total of 3 rows removed. As all three of these column's information is contained in total living area. The significance these 3 rows had on the best fit graph of is demonstrated below. The best fit line is set with an order of 2.
 
 
-## Before and After Outliers Removed for Total Living Area vs Price.
+#### Before and After Outliers Removed for Total Living Area vs Price.
 ![title](photos/proj_2_liv_vs_sale_b4.jpg)
 ![title](photos/proj_2_liv_vs_sale_after.jpg)
 
+### Setting Up a Baseline Model
+ The baseline model I set up for my example is a basic linear regression using only the top 5 variables of Overall Quality, Total Living Area, Exterior Quality, Kitchen Quality, and Garage Area. Doing a train test split on our training data, I got back a score of 84.6% on our split train, and 83.3% on our split testing data. This is not bad considering these are only 5 variables out of 80.
 
 
-# Setting Up a Baseline Model
- The baseline model in this example is a simple linear regression using only the top 5 variables of Overall Quality, Total Living Area, Exterior Quality, Kitchen Quality, and Garage Area. Doing a train test split on our training data, I got back a score of 84.6% on our split train, and 83.3% on our split testing data. This is not bad considering these are only 5 variables out of 80.
+### Setting Up the Model
+ For the model itself, I used a train test split to verify the data on itself before applying it to the new test data. I utilized polynomial features to the 2nd degree and fit the data to a standard scaler in order transform the data so rankings from 1-5 and rankings from 1-10 would be comparable. 
+ After attempting a few different methods, I settled on fitting the data to a ridge cross validation model. The model's r2 score indicated that the model was 93.6% fit to the training data and 87.6% accurate at determining the price in my split test set. I considered this adequate to use even though it is overfit on my training model because it had the largest improvement on the overall test dataset.
 
 
-# Setting Up the Model
- For the model itself, I used a train test split to verify the data on itself before applying it to the new test data. I utilized polynomial features to the 2nd degree and fit the data to a standard scaler in order transform the data. 
- After attempting a few different methods, I settled on fitting the data to a ridge cross validation model. The model's r2 score indicated that the model was 93.6% fit to the training data and 87.6% accurate at determining the price in my split test set. I considered this adequate to use and decided to progress to the official testing data. 
-
-
-# Conclusion/Recommendations:        
+### Conclusion/Recommendations:        
 We can say with confidence that the overall quality, total living area, exterior quality, kitchen area and garage area have significant impacts on the price of the house. Going from 5 variables to 19 variables and using a more robust model we only gained 4.3% accuracy. 
 
 I would like to dig further into methods of fitting and transforming the data. I'd like to see if we analyze more what columns should be included and what models could increase the accuracy without overfitting the data.
