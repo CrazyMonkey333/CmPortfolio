@@ -98,6 +98,9 @@ This project involved many steps before I started to build a model.
 5. Feature engineered general living area combined with finished basement area for total living area.  
 6. Removed 3 remarkable outliers with incredibly large living area.
 
+![title](https://github.com/cmrjkva/DSI_projects/blob/master/project_2_ames_housing/photos/proj_2_liv_vs_sale_b4.jpg)
+![title](https://github.com/cmrjkva/DSI_projects/blob/master/project_2_ames_housing/photos/proj_2_liv_vs_sale_after.jpg)
+
 #### Setting Up a Baseline Model
 The baseline model I set up for my example is a basic linear regression using only the top 5 variables.
 1. Overall Quality
