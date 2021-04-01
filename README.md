@@ -42,6 +42,7 @@ The second modeling breakthrough we had was harnessing geospatial data through K
 The third major breakthrough was the trailing averages. Due to the cumulative nature of meteorological effects on drought severity, we chose to include drought, temperature and precipitation trailing averages over 12-, 9-, 6-, and 3-months. Adding that data essentially doubled our recall scores for medium sized fires, which improved our overall model recall. Next, since our Neural Network is a blackbox model, we were not able to glean as much insight into features. We utilized Random Forest Classification to compliment insights from our Neural Network model by providing top features and weights.
 
 **Top 3 features (excluding location clusters):**
+
 |Feature|Importance|Feature Description|  
 |---|---|---|  
 |tavg_t3m|0.05085|Average Temperature Past 3 Months|  
@@ -55,6 +56,7 @@ Because our goal was to improve preparedness and help contain damage from wildfi
 Each of the seven-class classifications requires sklearn's estimators to perform 21 separate classifications - fitting some of the estimators we evaluated (e.g. SVM) was very computationally expensive. Despite being computationally expensive, we were able to create a model that gave us a significant increase in our recall score. We can confidently predict very large fires and some mid-range fires with our current model.
 
 **Classes and model improvements:**
+
 |Class| Size Acres|Baseline (% of dataset)|Final Model|
 |---|---|---|---|
 |A| >0<=0.25|62%|59%|
@@ -66,6 +68,7 @@ Each of the seven-class classifications requires sklearn's estimators to perform
 |G|5000+|0.07%|86%|
 
 #### Tech Stack
+
 | Amazon AWS S3 | Amazon CLI | Boto3 | Matplotlib | Mpl_toolkits | Tensorflow |
 | Python3 | Seaborn | Sklearn | Sqlite | Statsmodels | Streamlit | 
 
