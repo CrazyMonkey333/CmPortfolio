@@ -9,11 +9,10 @@ The global atmospheric monitoring satellite Copernicus recorded CO2 emissions fr
 Overall 10.2 million acres of land went up in flame and 46 people lost their lives. The total cost in material damages is upwards of 19.88 billion USD. 
 
 
-![title](https://github.com/cmrjkva/DSI_projects/blob/master/project_5_wildfire_prediction/visuals/North_Complex_smoke_in_San_Francisco_-_Bay_Bridge_and_Financial_District.jpg?raw=true)
+![title](https://atmosphere.copernicus.eu/sites/default/files/inline-images/nasa_worldview_usa_20190911_suomiviirs_pm_small.png)
+*Image from the NOAA/NASA Suomi-NPP satellite of smoke over the western US on 11 September 2020. Orange dots show active wildfires. California is at the centre of the map along the US west coast, with Oregon to its north and Washington just north of Oregon. Credit: NOAA/NASA.*
 
 As a team we decided to investigate the relationship between weather data (precipitation, temperatures, and drought) and the occurrences of fires to build a model which would predict the size of wildfires to help our communities prepare. 
-
-![](https://github.com/cmrjkva/DSI_projects/blob/master/project_5_wildfire_prediction/visuals/fire_precip_heat.png?raw=true)
 
 #### Our project focused on the following 11 States in the US: 
 | Arizona | California | Colorado | Idaho | Montana | New Mexico | Nevada | Utah | Oregon | Washington | Wyoming |
@@ -28,12 +27,12 @@ A spatial database of 1.88 million wildfires that occurred in the United States 
 Meteorological dataset covering 120 years of weather information for the 11 western US states of: AZ, CA, CO, ID, NM, NV, MT, OR, UT, WA, and WY, including metrics and indexes describing precipitation, temperatures, and droughts.
 The two datasets were combined by matching weather information and fire data on the combination of month-year-state for each of the fires that burned from 1992 to 2015 in the eleven states of interest. 
 
+![](https://github.com/cmrjkva/DSI_projects/blob/master/project_5_wildfire_prediction/visuals/fire_precip_heat.png?raw=true)
+
 #### Modeling
 The project ultimately uses two main models.
-- Neural network for predictive power and 
+- Neural network for predictive power 
 - Random Forest Classifier for feature importance. 
-
-We set up our model as a multi-classification where class "A" corresponds to fires smaller than 0.01 acres, "B" - 0.225 acres, "C" - 10 acres, "D" - 100 acres , "E" - 300 acres , "F" - 1000 acres, and "G" - all fires larger than 1000 acres.
 
 We optimized the neural network on recall score focusing on true positive rate as this helped us predict larger and more destructive wildfires. To improve our models, we employed the modeling technique of bootstrapping which gave us a more normal distribution of wildfire classes. This way, we were able to capture our larger fires.
 
@@ -136,4 +135,4 @@ We can say with confidence that the overall quality, total living area, exterior
 
 ---------------------------------------------------------------------------------------
 
-
+<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
