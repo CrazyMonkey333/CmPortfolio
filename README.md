@@ -1,63 +1,6 @@
 # CM Vigil April : Portfolio
 --------------------------------------------------------------------
-
-# Determining Housing Prices using Data Science
-
-I took on the role of analyzing and modeling housing data for the Iowa Assessors Society. We had a data set containing information from the Ames Assessor's Office in computing assessed values for individual properties sold in Ames, IA from 2006 to 2010. The population size was 2930 homes with 82 variables. The 82 variables included nominal, ordinal, discrete and continuous observations. 
-
-We were curious to what features matter most in determining a fair market value for a home. This information has the potential to be valuable to everyone in the housing market from buyers to sellers. We also had an additional data set of homes to be appraised and we want to accurately measure their values. 
-    
-This project involved many steps before I started to build a model. 
-1. Crafted a problem statement
-2. Imported and cleaned the data (which involved dealing with lots of null values)
-3. Conducted exploratory data analysis in using seaborn heatmaps and coefficients of correlation to determine feature importance
-4. Feature engineered buckets for neighborhoods, exterior, and sale type
-5. Feature engineered general living area combined with finished basement area for total living area.  
-6. Removed 3 remarkable outliers with incredibly large living area.
-
-#### Setting Up a Baseline Model
-The baseline model I set up for my example is a basic linear regression using only the top 5 variables.
-1. Overall Quality
-2. Total Living Area
-3. Exterior Quality
-4. Kitchen Quality
-5. Garage Area
-
-Doing a train test split on our training data, I got back a score of 84.6% on our split train, and 83.3% on our split testing data. This is not bad considering these are only 5 variables out of 82.
-
-#### Setting Up the Model
-I utilized polynomial features to the 2nd degree and fit the data to a standard scaler in order transform the data so rankings from 1-5 and rankings from 1-10 would be comparable. After attempting a few different methods, I settled on fitting the data to a ridge cross validation model. The model's r2 score indicated that the model was 93.6% fit to the training data and 87.6% accurate at determining the price in my split test set.
-
-#### Conclusion/Recommendations:        
-We can say with confidence that the overall quality, total living area, exterior quality, kitchen area and garage area have the most significant impacts on the price of the house. Going from 5 variables to 19 variables and using a more robust model we only gained 4.3% accuracy on the testing datasets. However excluding Lot Frontage due to the many null values likely had a significant dampening effect on improving our accuracy.
-
----------------------------------------------------------------------------------------
-
-# Star Trek vs Star Trek, Web scrapping with Web API’s and NLP modeling.
-
-NLP is useful in many applications of technology that use textual and/or verbal language such as classifying scammer emails and detecting fake news, or even targeted advertising on social media sites. In this project I demonstrate how to scrape data off the web using a web application programming interface or web API and how to use classification models on language data. In this case I use the [Pushshift's](https://github.com/pushshift/api) reddit API to extract submissions. Then after processing the language data, I apply classification models to determine which subreddit the posts came from. 
-
-#### The why
-A close friend of mine recently asked “What’s the difference between Star Trek and Star Wars?” and I nearly let me emotions get the best of me. How could someone close to me go so many years living without understanding what Star Wars and Star Trek are about? It hit me that there may be a lot of people out there that do not know the difference between a Klingon and an Ewok! So this here is a little project I decided to do to help my friend out. My project notebook, when ran will take data from these sci-fi series subreddits and make it so that you will know if the language is about Star Trek or Star Wars. 
-
-#### Data Collection 
-The code in the web scraping notebook takes 20 loops through the subreddit of choice, taking 100 posts at a time. It begins when you run the code and works backwards, taking a breather between cycles (to not alarm the website) before continuing the loop to completion.  This process gives us 4000 data entries of submissions, an evenly distributed 2000 entries for each subreddit.
-
-#### Data Cleaning and EDA
-In the data exploration and cleaning section I combined the self-text and title features, cleaned the text characters to fill in null values with an empty space and removed any special characters. Further on down the road when I found outliers I came back to remove them. I tokenized, lemmatized and stemmed out the words, considered stop words as well to explore the data in depth and even did a word frequency check that indicates the most common words in each subreddit. However, there is a lot of overlap in these similar subreddits; it is far more impactful to determine the importance of words instead of frequency.
-
-#### Modeling
-I tested on two models. Adaboost and logistic regression models were ran through a cross validated grid search. The adaboost was the least over/under fit model. The logistic regression performed at a higher accuracy level on both the test and training data, and because of that I selected it. 
-
-![ADABOOST Confusion MATRIX](images/adaboost.png)
-![Logreg Confusion MATRIX](images/logreg.png)
-
-#### Evaluation and Conclusion
-In conclusion for those of you that have not seen or heard of Star Wars or Star Trek, you could memorize what category these 20 words are in and have a solid idea of which fandom your friend is talking about. Contextually for reddit this could be used for targeted advertising such as star trek themed video games to star trek fans vs star wars Legos for star wars fans.  This model evaluates textual data to identify what people are discussing in two distinct but similar categories.
-
---------------------------------------------------------------------------------
-
-# Wildfire Fire Risk / Size Predictions - Group Project
+# [Wildfire Size Predictor](https://github.com/CrazyMonkey333/DSI_projects/tree/master/project_5_wildfire_prediction)
 
 2020 will be remembered as the year of a deadly pandamic, civil unrest, and climate disasters. In 2020 the Western United States suffered the most active fire season in its recorded history. California had the single worst fire season recorded. Arizona had the worst in a decade and Oregon had its most destructive; meanwhile Washington and Colorado had several of their largest all-time wildfires recorded. The global atmospheric monitoring satellite Copernicus recorded CO2 emissions from the 2020 fires and it was noted in September that “The fires are emitting lots of smoke and pollution into the atmosphere; those in California and Oregon have already emitted far more carbon in 2020 than in any other year since CAMS records begin in 2003” - [CAMS monitors smoke release from devastating US wildfires | Copernicus](https://atmosphere.copernicus.eu/cams-monitors-smoke-release-devastating-us-wildfires). Overall 10.2 million acres of land went up in flame and 46 people lost their lives. The total cost in material damages is upwards of 19.88 billion USD. 
 As a team we decided to investigate the relationship between weather data (precipitation, temperatures, and drought) and the occurrences of fires to build a model which would predict the size of wildfires to help our communities prepare. 
@@ -118,5 +61,59 @@ Each of the seven-class classifications requires sklearn's estimators to perform
 | Amazon AWS S3 | Amazon CLI | Boto3 | Matplotlib | Mpl_toolkits | Tensorflow |
 | Python3 | Seaborn | Sklearn | Sqlite | Statsmodels | Streamlit | 
 
+----------------------------------------------------
+
+# [Star Trek vs Star Trek : Web API’s and NLP](https://github.com/CrazyMonkey333/DSI_projects/tree/master/project_3_webscrape_nlp)
+
+NLP is useful in many applications of technology that use textual and/or verbal language such as classifying scammer emails and detecting fake news, or even targeted advertising on social media sites. In this project I demonstrate how to scrape data off the web using a web application programming interface or web API and how to use classification models on language data. In this case I use the [Pushshift's](https://github.com/pushshift/api) reddit API to extract submissions. Then after processing the language data, I apply classification models to determine which subreddit the posts came from. 
+
+#### The why
+A close friend of mine recently asked “What’s the difference between Star Trek and Star Wars?” and I nearly let me emotions get the best of me. How could someone close to me go so many years living without understanding what Star Wars and Star Trek are about? It hit me that there may be a lot of people out there that do not know the difference between a Klingon and an Ewok! So this here is a little project I decided to do to help my friend out. My project notebook, when ran will take data from these sci-fi series subreddits and make it so that you will know if the language is about Star Trek or Star Wars. 
+
+#### Data Collection 
+The code in the web scraping notebook takes 20 loops through the subreddit of choice, taking 100 posts at a time. It begins when you run the code and works backwards, taking a breather between cycles (to not alarm the website) before continuing the loop to completion.  This process gives us 4000 data entries of submissions, an evenly distributed 2000 entries for each subreddit.
+
+#### Data Cleaning and EDA
+In the data exploration and cleaning section I combined the self-text and title features, cleaned the text characters to fill in null values with an empty space and removed any special characters. Further on down the road when I found outliers I came back to remove them. I tokenized, lemmatized and stemmed out the words, considered stop words as well to explore the data in depth and even did a word frequency check that indicates the most common words in each subreddit. However, there is a lot of overlap in these similar subreddits; it is far more impactful to determine the importance of words instead of frequency.
+
+#### Modeling
+I tested on two models. Adaboost and logistic regression models were ran through a cross validated grid search. The adaboost was the least over/under fit model. The logistic regression performed at a higher accuracy level on both the test and training data, and because of that I selected it. 
+
+#### Evaluation and Conclusion
+In conclusion for those of you that have not seen or heard of Star Wars or Star Trek, you could memorize what category these 20 words are in and have a solid idea of which fandom your friend is talking about. Contextually for reddit this could be used for targeted advertising such as star trek themed video games to star trek fans vs star wars Legos for star wars fans.  This model evaluates textual data to identify what people are discussing in two distinct but similar categories.
+
+--------------------------------------------------------------------------------
+
+# [Determining Home Values](https://github.com/CrazyMonkey333/DSI_projects/tree/master/project_2_ames_housing)
+
+I took on the role of analyzing and modeling housing data for the Iowa Assessors Society. We had a data set containing information from the Ames Assessor's Office in computing assessed values for individual properties sold in Ames, IA from 2006 to 2010. The population size was 2930 homes with 82 variables. The 82 variables included nominal, ordinal, discrete and continuous observations. 
+
+We were curious to what features matter most in determining a fair market value for a home. This information has the potential to be valuable to everyone in the housing market from buyers to sellers. We also had an additional data set of homes to be appraised and we want to accurately measure their values. 
+    
+This project involved many steps before I started to build a model. 
+1. Crafted a problem statement
+2. Imported and cleaned the data (which involved dealing with lots of null values)
+3. Conducted exploratory data analysis in using seaborn heatmaps and coefficients of correlation to determine feature importance
+4. Feature engineered buckets for neighborhoods, exterior, and sale type
+5. Feature engineered general living area combined with finished basement area for total living area.  
+6. Removed 3 remarkable outliers with incredibly large living area.
+
+#### Setting Up a Baseline Model
+The baseline model I set up for my example is a basic linear regression using only the top 5 variables.
+1. Overall Quality
+2. Total Living Area
+3. Exterior Quality
+4. Kitchen Quality
+5. Garage Area
+
+Doing a train test split on our training data, I got back a score of 84.6% on our split train, and 83.3% on our split testing data. This is not bad considering these are only 5 variables out of 82.
+
+#### Setting Up the Model
+I utilized polynomial features to the 2nd degree and fit the data to a standard scaler in order transform the data so rankings from 1-5 and rankings from 1-10 would be comparable. After attempting a few different methods, I settled on fitting the data to a ridge cross validation model. The model's r2 score indicated that the model was 93.6% fit to the training data and 87.6% accurate at determining the price in my split test set.
+
+#### Conclusion/Recommendations:        
+We can say with confidence that the overall quality, total living area, exterior quality, kitchen area and garage area have the most significant impacts on the price of the house. Going from 5 variables to 19 variables and using a more robust model we only gained 4.3% accuracy on the testing datasets. However excluding Lot Frontage due to the many null values likely had a significant dampening effect on improving our accuracy.
+
+---------------------------------------------------------------------------------------
 
 
