@@ -59,8 +59,8 @@ In conclusion for those of you that have not seen or heard of Star Wars or Star 
 
 # Wildfire Fire Risk / Size Predictions - Group Project
 
-2020 will be remembered as a year of a deadly pandamic, civil unrest, and climate disasters. In 2020 the Western United States suffered the most active fire season in its recorded history. California had the single worst fire season in its history. Arizona had the worst in a decade and Oregon had its most destructive; meanwhile Washington and Colorado had several of their largest all-time wildfires recorded. The global atmospheric monitoring satellite Copernicus recorded CO2 emissions from the 2020 fires and it was noted in September that “The fires are emitting lots of smoke and pollution into the atmosphere; those in California and Oregon have already emitted far more carbon in 2020 than in any other year since CAMS records begin in 2003” - [CAMS monitors smoke release from devastating US wildfires | Copernicus](https://atmosphere.copernicus.eu/cams-monitors-smoke-release-devastating-us-wildfires). Overall 10.2 million acres of land went up in flame and 46 people lost their lives. The total cost in material damages is upwards of 19.88 billion USD. 
-As a team we decided to investigate the relationship between weather data (precipitation, temperatures, and drought) and the occurrences of fires to build a model which would predict the size of wildfires to help our communities prepare. We set up our model as a multi-classification where class "A" corresponds to fires smaller than 0.01 acres, "B" - 0.225 acres, "C" - 10 acres, "D" - 100 acres , "E" - 300 acres , "F" - 1000 acres, and "G" - all fires larger than 1000 acres.
+2020 will be remembered as the year of a deadly pandamic, civil unrest, and climate disasters. In 2020 the Western United States suffered the most active fire season in its recorded history. California had the single worst fire season recorded. Arizona had the worst in a decade and Oregon had its most destructive; meanwhile Washington and Colorado had several of their largest all-time wildfires recorded. The global atmospheric monitoring satellite Copernicus recorded CO2 emissions from the 2020 fires and it was noted in September that “The fires are emitting lots of smoke and pollution into the atmosphere; those in California and Oregon have already emitted far more carbon in 2020 than in any other year since CAMS records begin in 2003” - [CAMS monitors smoke release from devastating US wildfires | Copernicus](https://atmosphere.copernicus.eu/cams-monitors-smoke-release-devastating-us-wildfires). Overall 10.2 million acres of land went up in flame and 46 people lost their lives. The total cost in material damages is upwards of 19.88 billion USD. 
+As a team we decided to investigate the relationship between weather data (precipitation, temperatures, and drought) and the occurrences of fires to build a model which would predict the size of wildfires to help our communities prepare. 
 
 ![](/visuals/fire_size_vs_temp_precip_by_month.png)
 
@@ -75,21 +75,20 @@ A spatial database of 1.88 million wildfires that occurred in the United States 
 
 - [NOAA Climate Data](https://www7.ncdc.noaa.gov/CDO/CDODivisionalSelect.jsp#).
 Meteorological dataset covering 120 years of weather information for the 11 western US states of: AZ, CA, CO, ID, NM, NV, MT, OR, UT, WA, and WY, including metrics and indexes describing precipitation, temperatures, and droughts.
-The two datasets were combined by matching weather information and fire data on the combination of month-year-state for each of the fires that burned from 1992 to 2015 in the eleven states of interest. Due to the cumulative nature of meteorological effects on drought severity, we chose to include drought, temperature and precipitation trailing averages over 12-, 9-, 6-, and 3-months.
-
-![](/visuals/fire_size_vs_temp_precip_by_month.png)
+The two datasets were combined by matching weather information and fire data on the combination of month-year-state for each of the fires that burned from 1992 to 2015 in the eleven states of interest. 
 
 #### Modeling
 The project ultimately uses two main models.
 - Neural network for predictive power and 
 - Random Forest Classifier for feature importance. 
 
-We optimized the neural network on recall score focusing on true positive rate and capturing large fires over small fires. Large fires being more destructive and being more in-line with the scope of the project at the expense of smaller fires. The final chosen neural network model topology optimizes recall over accuracy. 
-To improve our models, we employed the modeling technique of bootstrapping which gave us a more normal distribution of wildfire classes. This way, we were able to capture our larger fires. It greatly improved recall which is ultimately the target we wanted to pursue, as this helped us predict larger and more destructive wildfires. 
+We set up our model as a multi-classification where class "A" corresponds to fires smaller than 0.01 acres, "B" - 0.225 acres, "C" - 10 acres, "D" - 100 acres , "E" - 300 acres , "F" - 1000 acres, and "G" - all fires larger than 1000 acres.
+
+We optimized the neural network on recall score focusing on true positive rate as this helped us predict larger and more destructive wildfires. To improve our models, we employed the modeling technique of bootstrapping which gave us a more normal distribution of wildfire classes. This way, we were able to capture our larger fires.
 
 The second modeling breakthrough we had was harnessing geospatial data through KMeans clustering of longitude and latitudinal data. We then One-Hot-Encoded it which gave us a sparse matrix that was the most important predictive element of our model. We believe that this is because terrain features matter immensely when determining the potential size of a wildfire.
 
-The third major breakthrough was the trailing averages as noted in the summary above. Adding that data essentially doubled our recall scores for medium sized fires, which improved our overall model recall. Next, since our Neural Network is a blackbox model, we were not able to glean as much insight into features. We utilized Random Forest Classification to compliment insights from our Neural Network model by providing top features and weights.
+The third major breakthrough was the trailing averages. Due to the cumulative nature of meteorological effects on drought severity, we chose to include drought, temperature and precipitation trailing averages over 12-, 9-, 6-, and 3-months. Adding that data essentially doubled our recall scores for medium sized fires, which improved our overall model recall. Next, since our Neural Network is a blackbox model, we were not able to glean as much insight into features. We utilized Random Forest Classification to compliment insights from our Neural Network model by providing top features and weights.
 
 **Top 3 features (excluding location clusters):**
 |Feature|Importance|Feature Description|  
