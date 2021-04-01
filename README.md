@@ -63,7 +63,7 @@ Each of the seven-class classifications requires sklearn's estimators to perform
 
 ----------------------------------------------------
 
-# [Star Trek vs Star Trek : Web API’s and NLP](https://github.com/CrazyMonkey333/DSI_projects/tree/master/project_3_webscrape_nlp)
+# [Star Wars vs Star Trek : Web API’s and NLP](https://github.com/CrazyMonkey333/DSI_projects/tree/master/project_3_webscrape_nlp)
 
 NLP is useful in many applications of technology that use textual and/or verbal language such as classifying scammer emails and detecting fake news, or even targeted advertising on social media sites. In this project I demonstrate how to scrape data off the web using a web application programming interface or web API and how to use classification models on language data. In this case I use the [Pushshift's](https://github.com/pushshift/api) reddit API to extract submissions. Then after processing the language data, I apply classification models to determine which subreddit the posts came from. 
 
