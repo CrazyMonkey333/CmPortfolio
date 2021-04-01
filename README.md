@@ -1,6 +1,6 @@
 # CM Vigil April : Portfolio
 
-[Medium blog](https://cmapril3.medium.com/) | [Linked-IN](https://www.linkedin.com/in/cm-april/)
+[Medium blog](https://cmapril3.medium.com/) | [Linked-IN](https://www.linkedin.com/in/cm-april/) | [github projects](https://github.com/cmrjkva/DSI_projects)
 --------------------------------------------------------------------
 # [Wildfire Size Predictor](https://github.com/CrazyMonkey333/DSI_projects/tree/master/project_5_wildfire_prediction)
 
