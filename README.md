@@ -59,7 +59,7 @@ In conclusion for those of you that have not seen or heard of Star Wars or Star 
 
 # Wildfire Fire Risk / Size Predictions - Group Project
 
-2020 was not just a year of a global pandemic outbreak. It was also year of the most active fire season in the Western United States' recorded history. California had the single worst fire season in its history. Arizona had the worst in a decade and Oregon had its most destructive; meanwhile Washington and Colorado had several of their largest all-time wildfires recorded. The global atmospheric monitoring satellite Copernicus recorded CO2 emissions from the 2020 fires and it was noted in September that “The fires are emitting lots of smoke and pollution into the atmosphere; those in California and Oregon have already emitted far more carbon in 2020 than in any other year since CAMS records begin in 2003” - [CAMS monitors smoke release from devastating US wildfires | Copernicus](https://atmosphere.copernicus.eu/cams-monitors-smoke-release-devastating-us-wildfires). Overall 10.2 million acres of land went up in flame and 46 people lost their lives. The total cost in material damages is upwards of 19.88 billion USD. 
+2020 will be remembered as a year of a deadly pandamic, civil unrest, and climate disasters. In 2020 the Western United States suffered the most active fire season in its recorded history. California had the single worst fire season in its history. Arizona had the worst in a decade and Oregon had its most destructive; meanwhile Washington and Colorado had several of their largest all-time wildfires recorded. The global atmospheric monitoring satellite Copernicus recorded CO2 emissions from the 2020 fires and it was noted in September that “The fires are emitting lots of smoke and pollution into the atmosphere; those in California and Oregon have already emitted far more carbon in 2020 than in any other year since CAMS records begin in 2003” - [CAMS monitors smoke release from devastating US wildfires | Copernicus](https://atmosphere.copernicus.eu/cams-monitors-smoke-release-devastating-us-wildfires). Overall 10.2 million acres of land went up in flame and 46 people lost their lives. The total cost in material damages is upwards of 19.88 billion USD. 
 As a team we decided to investigate the relationship between weather data (precipitation, temperatures, and drought) and the occurrences of fires to build a model which would predict the size of wildfires to help our communities prepare. We set up our model as a multi-classification where class "A" corresponds to fires smaller than 0.01 acres, "B" - 0.225 acres, "C" - 10 acres, "D" - 100 acres , "E" - 300 acres , "F" - 1000 acres, and "G" - all fires larger than 1000 acres.
 
 ![](/visuals/fire_size_vs_temp_precip_by_month.png)
@@ -69,17 +69,26 @@ As a team we decided to investigate the relationship between weather data (preci
 
 #### Data Collection
 We used two sources of data :
-- [Kaggle Fire Data]([https://www.kaggle.com/rtatman/188-million-us-wildfires/notebooks](https://www.kaggle.com/rtatman/188-million-us-wildfires/notebooks)). A spatial database of 1.88 million wildfires that occurred in the United States from 1992 to 2015. We collected the most current and largest dataset readily available. There was 140 million acres burned during this 24-year period. The data set includes: discovery date, final fire size, and location (latitude and longitude) among many other features. 
-- [NOAA Climate Data]([https://www7.ncdc.noaa.gov/CDO/CDODivisionalSelect.jsp#](https://www7.ncdc.noaa.gov/CDO/CDODivisionalSelect.jsp#)). Meteorological dataset covering 120 years of weather information for the 11 western US states of: AZ, CA, CO, ID, NM, NV, MT, OR, UT, WA, and WY, including metrics and indexes describing precipitation, temperatures, and droughts.
+### Data Dictionary 
+- [Kaggle Fire Data](https://www.kaggle.com/rtatman/188-million-us-wildfires/notebooks).
+A spatial database of 1.88 million wildfires that occurred in the United States from 1992 to 2015. We collected the most current and largest dataset readily available. There was 140 million acres burned during this 24-year period. The data set includes: discovery date, final fire size, and location (latitude and longitude) among many other features.
+
+- [NOAA Climate Data](https://www7.ncdc.noaa.gov/CDO/CDODivisionalSelect.jsp#).
+Meteorological dataset covering 120 years of weather information for the 11 western US states of: AZ, CA, CO, ID, NM, NV, MT, OR, UT, WA, and WY, including metrics and indexes describing precipitation, temperatures, and droughts.
 The two datasets were combined by matching weather information and fire data on the combination of month-year-state for each of the fires that burned from 1992 to 2015 in the eleven states of interest. Due to the cumulative nature of meteorological effects on drought severity, we chose to include drought, temperature and precipitation trailing averages over 12-, 9-, 6-, and 3-months.
 
 ![](/visuals/fire_size_vs_temp_precip_by_month.png)
 
-
 #### Modeling
-The project ultimately uses two main models. Neural network for predictive power and Random Forest Classifier for feature importance. We optimized the neural network on recall score focusing on true positive rate and capturing large fires over small fires. Large fires being more destructive and being more in-line with the scope of the project at the expense of smaller fires. The final chosen neural network model topology optimizes recall over accuracy. 
-To improve our models, we employed the modeling technique of bootstrapping which gave us a more normal distribution of wildfire classes. This way, we were able to capture our larger fires. It greatly improved recall which is ultimately the target we wanted to pursue, as this helped us predict  larger and more destructive wildfires. 
+The project ultimately uses two main models.
+- Neural network for predictive power and 
+- Random Forest Classifier for feature importance. 
+
+We optimized the neural network on recall score focusing on true positive rate and capturing large fires over small fires. Large fires being more destructive and being more in-line with the scope of the project at the expense of smaller fires. The final chosen neural network model topology optimizes recall over accuracy. 
+To improve our models, we employed the modeling technique of bootstrapping which gave us a more normal distribution of wildfire classes. This way, we were able to capture our larger fires. It greatly improved recall which is ultimately the target we wanted to pursue, as this helped us predict larger and more destructive wildfires. 
+
 The second modeling breakthrough we had was harnessing geospatial data through KMeans clustering of longitude and latitudinal data. We then One-Hot-Encoded it which gave us a sparse matrix that was the most important predictive element of our model. We believe that this is because terrain features matter immensely when determining the potential size of a wildfire.
+
 The third major breakthrough was the trailing averages as noted in the summary above. Adding that data essentially doubled our recall scores for medium sized fires, which improved our overall model recall. Next, since our Neural Network is a blackbox model, we were not able to glean as much insight into features. We utilized Random Forest Classification to compliment insights from our Neural Network model by providing top features and weights.
 
 **Top 3 features (excluding location clusters):**
@@ -89,14 +98,11 @@ The third major breakthrough was the trailing averages as noted in the summary a
 |pcp|0.04720|Month Precipitation|  
 |tavg_t6m|0.04633|Average Temperature Past 6 Months|
 
-![](/visuals/confusion_matrix_fire.png)
-
 #### Conclusions
-Wildfires are extremely complex phenomena. While the NOAA data offered a set of independent variables which described weather history, we were not able to include in our model other important factors which also affect final fire size, such as wind or terrain features (e.g. land cover or incline).
-Switching our target variable from a continuous one (fire size, in acres) to a multi-class problem, improved the score from an R2 of under 10% accuracy to over 60%. Further, re-defining the problem as a binary classification of "large" vs "small" fires drove accuracy up to 62-77%; depending on the threshold chose to delineate between the two classes.
+Wildfires are extremely complex phenomena. While the NOAA data offered a set of independent variables which described weather history, we were not able to include in our model other important factors which also affect final fire size, such as wind or terrain features (e.g. land cover or incline). Switching our target variable from a continuous one (fire size, in acres) to a multi-class problem, improved the score from an R2 of under 10% accuracy to over 60%. Further, re-defining the problem as a binary classification of "large" vs "small" fires drove accuracy up to 62-77%; depending on the threshold chose to delineate between the two classes.
+
 Because our goal was to improve preparedness and help contain damage from wildfires without putting efforts into preventing fires which weren't likely to spread, our ultimate focus was on increasing the recall of our model, and moreover - to increase its recall with regards to large fires.
-Each of the seven-class classifications requires sklearn's estimators to perform 21 separate classifications - fitting some of the estimators we evaluated (e.g. SVM) was very computationally expensive.
-Despite being computationally expensive, we were able to create a model that gave us a significant increase in our recall score. We can confidently predict very large fires and some mid-range fires with our current model.
+Each of the seven-class classifications requires sklearn's estimators to perform 21 separate classifications - fitting some of the estimators we evaluated (e.g. SVM) was very computationally expensive. Despite being computationally expensive, we were able to create a model that gave us a significant increase in our recall score. We can confidently predict very large fires and some mid-range fires with our current model.
 
 **Classes and model improvements:**
 |Class| Size Acres|Baseline (% of dataset)|Final Model|
@@ -109,11 +115,9 @@ Despite being computationally expensive, we were able to create a model that gav
 |F|1000 to 4999|2%|59%|
 |G|5000+|0.07%|86%|
 
-#### Recommendations
-
-For further research we recommend extracting NOAA wind data such as wind speed, gusts and potentially the wind directionality. We took a deep dive into NOAA wind data but discovered that the combined datasets were far too large to add to our existing dataframe. Wind is a great weather indicator, and because wind speed can feed fires, we believe that adding wind data would have added significant value to our models.
-Furthermore, vegetation data and environmental composition data which is available on Google’s Earth Engine’s LANDFIRE databases would play a significant part in telling a deeper story on a wildfire's destructive ability. Merging those features into our datasets was unfortunately out of reach due to the time restraints. This required setting up an account with Google and being accepted to use their engine, and then exploring data using JavaScript. It became too cumbersome for our efforts but there is potential for further exploration. We believe these features merged into our current dataset could expand it in a worthwhile manner. 
-
 #### Tech Stack
 | Amazon AWS S3 | Amazon CLI | Boto3 | Matplotlib | Mpl_toolkits | Tensorflow |
 | Python3 | Seaborn | Sklearn | Sqlite | Statsmodels | Streamlit | 
+
+
+
