@@ -1,11 +1,17 @@
 # CM Vigil April : Portfolio
+
+[Cm's medium blog](https://cmapril3.medium.com/)
+[Cm's Linked-IN](https://www.linkedin.com/in/cm-april/)
 --------------------------------------------------------------------
 # [Wildfire Size Predictor](https://github.com/CrazyMonkey333/DSI_projects/tree/master/project_5_wildfire_prediction)
 
 2020 will be remembered as the year of a deadly pandemic, civil unrest, and climate disasters. In 2020 the Western United States suffered the most active fire season in its recorded history. California had the single worst fire season recorded. Arizona had the worst in a decade and Oregon had its most destructive; meanwhile Washington and Colorado had several of their largest all-time wildfires recorded. The global atmospheric monitoring satellite Copernicus recorded CO2 emissions from the 2020 fires and it was noted in September that “The fires are emitting lots of smoke and pollution into the atmosphere; those in California and Oregon have already emitted far more carbon in 2020 than in any other year since CAMS records begin in 2003” - [CAMS monitors smoke release from devastating US wildfires | Copernicus](https://atmosphere.copernicus.eu/cams-monitors-smoke-release-devastating-us-wildfires). Overall 10.2 million acres of land went up in flame and 46 people lost their lives. The total cost in material damages is upwards of 19.88 billion USD. 
+
+![](https://github.com/cmrjkva/DSI_projects/blob/master/project_5_wildfire_prediction/visuals/North_Complex_smoke_in_San_Francisco_-_Bay_Bridge_and_Financial_District.jpg?raw=true)
+
 As a team we decided to investigate the relationship between weather data (precipitation, temperatures, and drought) and the occurrences of fires to build a model which would predict the size of wildfires to help our communities prepare. 
 
-![](/visuals/fire_size_vs_temp_precip_by_month.png)
+![](https://github.com/cmrjkva/DSI_projects/blob/master/project_5_wildfire_prediction/visuals/fire_precip_heat.png?raw=true)
 
 #### Our project focused on the following 11 States in the US: 
 | Arizona | California | Colorado | Idaho | Montana | New Mexico | Nevada | Utah | Oregon | Washington | Wyoming |
@@ -68,19 +74,25 @@ Each of the seven-class classifications requires sklearn's estimators to perform
 NLP is useful in many applications of technology that use textual and/or verbal language such as classifying scammer emails and detecting fake news, or even targeted advertising on social media sites. In this project I demonstrate how to scrape data off the web using a web application programming interface or web API and how to use classification models on language data. In this case I use the [Pushshift's](https://github.com/pushshift/api) reddit API to extract submissions. Then after processing the language data, I apply classification models to determine which subreddit the posts came from. 
 
 #### The why
-A close friend of mine recently asked “What’s the difference between Star Trek and Star Wars?” and I nearly let me emotions get the best of me. How could someone close to me go so many years living without understanding what Star Wars and Star Trek are about? It hit me that there may be a lot of people out there that do not know the difference between a Klingon and an Ewok! So this here is a little project I decided to do to help my friend out. My project notebook, when ran will take data from these sci-fi series subreddits and make it so that you will know if the language is about Star Trek or Star Wars. 
+A close friend of mine recently asked “What’s the difference between Star Trek and Star Wars?” and I nearly let me emotions get the best of me. How could someone close to me go so many years living without understanding what Star Wars and Star Trek are about? It hit me that there may be a lot of people out there that do not know the difference between a Vulcan and a Gungan! So this here is a little project I decided to do to help my friend out. My project notebook, when ran will take data from these sci-fi series subreddits and make it so that you will know if the language is about Star Trek or Star Wars. 
+
 
 #### Data Collection 
 The code in the web scraping notebook takes 20 loops through the subreddit of choice, taking 100 posts at a time. It begins when you run the code and works backwards, taking a breather between cycles (to not alarm the website) before continuing the loop to completion.  This process gives us 4000 data entries of submissions, an evenly distributed 2000 entries for each subreddit.
 
 #### Data Cleaning and EDA
-In the data exploration and cleaning section I combined the self-text and title features, cleaned the text characters to fill in null values with an empty space and removed any special characters. Further on down the road when I found outliers I came back to remove them. I tokenized, lemmatized and stemmed out the words, considered stop words as well to explore the data in depth and even did a word frequency check that indicates the most common words in each subreddit. However, there is a lot of overlap in these similar subreddits; it is far more impactful to determine the importance of words instead of frequency.
+In the data exploration and cleaning section I combined the self-text and title features, filled in null values with an empty space, and removed any special characters. Further on down the road when I found outliers I came back to remove them. I tokenized, lemmatized and stemmed out the words, considered stop words as well to explore the data in depth and even did a count vectorization that indicated the most common words in each subreddit. However, there is a lot of overlap in these similar subreddits; it is far more impactful to determine the importance of words instead of frequency, as shown below. 
+
+![](https://github.com/cmrjkva/DSI_projects/blob/master/project_3_webscrape_nlp/images/components.png)
 
 #### Modeling
-I tested on two models. Adaboost and logistic regression models were ran through a cross validated grid search. The adaboost was the least over/under fit model. The logistic regression performed at a higher accuracy level on both the test and training data, and because of that I selected it. 
+I tested on two models. Adaboost and logistic regression models were ran through a cross validated grid search. The adaboost was the least over/under fit model. The logistic regression performed at a higher accuracy level on both the test and training data though so I took that as the better model in this instance.
 
 #### Evaluation and Conclusion
-In conclusion for those of you that have not seen or heard of Star Wars or Star Trek, you could memorize what category these 20 words are in and have a solid idea of which fandom your friend is talking about. Contextually for reddit this could be used for targeted advertising such as star trek themed video games to star trek fans vs star wars Legos for star wars fans.  This model evaluates textual data to identify what people are discussing in two distinct but similar categories.
+In conclusion for those of you that have not seen or heard of Star Wars or Star Trek, you could memorize what category these 20 words are in and have a solid idea of which fandom your friend is talking about.
+![](https://github.com/cmrjkva/DSI_projects/blob/master/project_3_webscrape_nlp/images/top10starwars.png)
+![](https://github.com/cmrjkva/DSI_projects/blob/master/project_3_webscrape_nlp/images/top10startrek.png)
+Contextually for reddit this could be used for targeted advertising such as star trek themed video games to star trek fans vs star wars Legos for star wars fans.  This model evaluates textual data to identify what people are discussing in two distinct but similar categories.
 
 --------------------------------------------------------------------------------
 
