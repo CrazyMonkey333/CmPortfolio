@@ -3,7 +3,7 @@
 
 # Determining Housing Prices using Data Science
 
-I took on the role of a data scientist in analyzing and modeling housing data for the Chamber of Commerce Committee of the Iowa House of Representatives. We had a data set containing information from the Ames Assessor's Office in computing assessed values for individual properties sold in Ames, IA from 2006 to 2010. The population size was 2930 homes with 82 variables. The 82 variables included nominal, ordinal, discrete and continuous observations. 
+I took on the role of analyzing and modeling housing data for Iowa Assessors Society. We had a data set containing information from the Ames Assessor's Office in computing assessed values for individual properties sold in Ames, IA from 2006 to 2010. The population size was 2930 homes with 82 variables. The 82 variables included nominal, ordinal, discrete and continuous observations. 
 
 We were curious to what features matter most in determining a fair market value for a home. This information has the potential to be valuable to everyone in the housing market from buyers to sellers. We also had an additional data set of homes to be appraised and we want to accurately measure their values. 
     
@@ -69,7 +69,7 @@ As a team we decided to investigate the relationship between weather data (preci
 
 #### Data Collection
 We used two sources of data :
-### Data Dictionary 
+
 - [Kaggle Fire Data](https://www.kaggle.com/rtatman/188-million-us-wildfires/notebooks).
 A spatial database of 1.88 million wildfires that occurred in the United States from 1992 to 2015. We collected the most current and largest dataset readily available. There was 140 million acres burned during this 24-year period. The data set includes: discovery date, final fire size, and location (latitude and longitude) among many other features.
 
